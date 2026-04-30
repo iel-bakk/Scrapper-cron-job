@@ -101,9 +101,20 @@ async function main() {
 
     console.log('\nFound ' + data.length + ' servers\n');
 
+    // Filter to only store Mikhal server data
+    const mikhalData = data.filter(item => item.server.toLowerCase() === 'mikhal');
+
+    if (mikhalData.length === 0) {
+      console.warn('⚠️  Mikhal server not found in scraped data');
+      await closeConnection();
+      process.exit(0);
+    }
+
+    console.log('Filtered to Mikhal server: ' + mikhalData.length + ' record(s)\n');
+
     // Display results in console
     const byCategory = {};
-    data.forEach(item => {
+    mikhalData.forEach(item => {
       if (!byCategory[item.category]) byCategory[item.category] = [];
       byCategory[item.category].push(item);
     });
@@ -120,8 +131,8 @@ async function main() {
     });
 
     // Store data to Neon
-    console.log('\n\nStoring data to Neon PostgreSQL...');
-    await storeKamasData(data);
+    console.log('\n\nStoring Mikhal data to Neon PostgreSQL...');
+    await storeKamasData(mikhalData);
     
     await closeConnection();
     console.log('\n✓ Scraping and storage completed successfully');
