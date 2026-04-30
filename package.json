@@ -1,0 +1,17 @@
+{
+  "name": "leskamas-scraper",
+  "version": "1.0.0",
+  "description": "GitHub Actions scheduler to fetch and store KAMAS prices from leskamas.com to Neon PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node index.js"
+  },
+  "keywords": ["scraper", "kamas", "github-actions", "neon", "postgres"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "pg": "^8.11.3"
+  }
+}
